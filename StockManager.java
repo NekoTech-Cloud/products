@@ -26,7 +26,13 @@ public class StockManager
      */
     public void addProduct(Product item)
     {
-        stockList.add(item);
+        //Challenge Exercise 2
+        if (findProduct(item.getID()) == null){
+            stockList.add(item);
+        }
+        else {
+            System.out.println("ID already exists");
+        }
     }
     
     /**
@@ -37,6 +43,14 @@ public class StockManager
      */
     public void delivery(int id, int amount)
     {
+        //Question 4
+        Product product = findProduct(id);
+        if (product != null) {
+            product.increaseQuantity(amount);
+        }
+        else {
+            System.out.println("Product not found");
+        }
     }
     
     /**
@@ -65,6 +79,10 @@ public class StockManager
     public int numberInStock(int id)
     {
         //Question 3
+        Product product = findProduct(id);
+        if (product != null) {
+            return product.getQuantity();
+        }
         return 0;
     }
 
@@ -75,5 +93,19 @@ public class StockManager
     {
         //Question 1
         System.out.println(stockList.toString());
+    }
+    
+    public void printProductDetailsBelowStock(int stockLevel){
+        //Challenge Exercise 1
+        for (Product stock : stockList) {
+            if (stock.getQuantity() < stockLevel){
+                System.out.println(stock.toString());
+            }
+        }
+    }
+    
+    public Product findProduct(String name){
+        //Outline for Challenge Exercise 3
+        return null;
     }
 }
